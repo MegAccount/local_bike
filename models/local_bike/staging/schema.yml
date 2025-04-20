@@ -1,0 +1,151 @@
+version: 2
+ 
+models:
+  - name: stg_00_local_bike__brands2
+    description: Table with brands
+    columns:
+      - name: brand_id
+        description: unique identifer of the brand
+        tests:
+          - not_null
+          - unique
+      - name: brand_name
+        description: brand name
+        tests:
+          - not_null
+ 
+  - name: stg_00_local_bike__categories2
+    description: Categories table
+    columns:
+      - name: category_id
+        description: unique identifer of the categories
+        tests:
+          - not_null
+          - unique
+      - name: category_name
+        description: categorie name
+        tests:
+          - not_null
+          - accepted_values : 
+              name: accepted_values_category_name
+              values: ['Children Bicycles', 'Comfort Bicycles', 'Cruisers Bicycles', 'Cyclocross Bicycles', 'Electric Bikes', 'Mountain Bikes', 'Road Bikes']
+ 
+  - name: stg_00_local_bike__customers2
+    description: customer table
+    columns:
+      - name: customer_id
+        description: unique identifer of the customer
+        tests:
+          - not_null
+          - unique 
+
+  - name: stg_00_local_bike__order_items2
+    description: order items table
+    columns:
+      - name: order_id
+        description: unique identifer of the order items
+        tests:
+          - not_null
+      - name: product_id
+        description: unique identifer of the product
+        tests:
+          - not_null         
+      - name: item_uid
+        description: unique identifer of the item, build from contactenation of item_id and product_id
+        tests:
+          - not_null
+          - unique
+      - name: item_quantity
+        description: quantity ordered
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: "item_quantity >= 0"
+      - name: unit_price
+        description: list price of the item
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: "unit_price >= 0"
+
+ 
+  - name: stg_00_local_bike__orders2
+    description: orders table
+    columns:
+      - name: order_id
+        description: unique identifer of the order
+        tests:
+          - not_null
+          - unique
+      - name: customer_id
+        description: unique identifer of the customer
+      - name: order_date
+        description: date of the order
+      - name: shipped_date
+        description: shipped date, with a change format form strg to date
+      - name: store_id
+        description: unique identifer of the product
+      - name: staff_id
+        description: unique identifer of the staff
+        tests:
+          - not_null
+ 
+  - name: stg_00_local_bike__products2
+    description: Product table
+    columns:
+      - name: product_id
+        description: unique identifer of the product
+        tests:
+          - not_null
+          - unique
+      - name: product_name
+        description: product name
+      - name: brand_id
+        description: unique identifer of the brand
+      - name: category_id
+        description: unique identifer of the categories
+      - name: unit_price
+        description: list price of the product
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: "unit_price >= 0"
+ 
+  - name: stg_00_local_bike__staffs2
+    description: staff table
+    columns:
+      - name: staff_id
+        description: unique identifer of the staff
+        tests:
+          - not_null
+          - unique
+      - name: store_id
+        description: unique identifer of the store
+ 
+  - name: stg_00_local_bike__stocks2
+    description: stocks table
+    columns:
+      - name: store_id
+        description: unique identifer of the store      
+      - name: product_id
+        description: unique identifer of the product
+      - name: stock_uid
+        description: unique identifer of the stock, build by concatenation of product_id, store_id
+        tests:
+          - not_null
+          - unique
+      - name: stock_quantity
+        description: stock quantity
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: "stock_quantity >= 0"
+
+  - name: stg_00_local_bike__stores2
+    description: stores table
+    columns:
+      - name: store_id
+        description: unique identifer of the store
+        tests:
+          - not_null
+          - unique
+      - name: store_name
+        description: name of the strore
+        tests:
+          - not_null

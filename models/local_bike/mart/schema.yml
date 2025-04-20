@@ -1,0 +1,57 @@
+version: 2
+
+models:
+  - name: mart_00_local_bike__all_tables2
+    description: '{{ doc("_mart_00_local_bike__all_tables2") }}'
+    columns:
+      - name: order_id
+        description: "Unique identifier for the order"
+        data_type: integer
+      - name: order_date
+        description: "The date when the order was done"
+        data_type: date
+      - name: shipped_date
+        description: "The date when the order was shipped"
+        data_type: date
+      - name: staff_full_name
+        description: "Full name of the staff member who processed the order"
+        data_type: string
+      - name: store_name
+        description: "Name of the store where the order was done"
+        data_type: string
+      - name: customer_id
+        description: "Unique identifier for the customer who placed the order"
+        data_type: integer
+      - name: customer_full_name
+        description: "Full name of the customer (first and last name concatenated)"
+        data_type: string
+      - name: brand_name
+        description: "Name of the product's brand"
+        data_type: string
+      - name: category_id
+        description: "Unique identifier for the product category"
+        data_type: integer
+      - name: category_name
+        description: "Name of the product's category"
+        data_type: string
+      - name: product_id
+        description: "Unique identifier for the product"
+        data_type: integer
+      - name: product_name
+        description: "Name of the product"
+        data_type: string
+      - name: item_id
+        description: "Unique identifier for the order item"
+        data_type: integer
+      - name: item_quantity
+        description: "Quantity of the product in the order"
+        data_type: integer
+      - name: unit_price
+        description: "Price per unit of the product"
+        data_type: decimal
+      - name: discount
+        description: "Discount applied to the product"
+        data_type: decimal
+      - name: sold_amount
+        description: "Total amount sold for this item, calculated as item_quantity * (unit_price * (1 - discount))"
+        data_type: decimal

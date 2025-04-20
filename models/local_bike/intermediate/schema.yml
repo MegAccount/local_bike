@@ -1,0 +1,96 @@
+version: 2
+
+models:
+  - name: int_00_local_bike__products2
+    description: "This model joins product, brand, and category data, providing a comprehensive list of products along with their associated brand and category details"
+    columns:
+      - name: brand_id
+        description: "Unique identifier for the brand"
+        data_type: integer
+      - name: brand_name
+        description: "Name of the brand"
+        data_type: string
+      - name: category_id
+        description: "Unique identifier for the category"
+        data_type: integer
+      - name: category_name
+        description: "Name of the category"
+        data_type: string
+      - name: product_id
+        description: "Unique identifier for the product"
+        data_type: integer
+      - name: product_name
+        description: "Name of the product"
+        data_type: string
+      - name: unit_price
+        description: "Price per unit of the product"
+        data_type: decimal
+
+  - name: int_00_local_bike__order_items2
+    description: "This model aggregates data from order items, calculating the total sold amount for each order item based on quantity, unit price, and discount"
+    columns:
+      - name: order_id
+        description: "Unique identifier for the order"
+        data_type: integer
+      - name: item_id
+        description: "Unique identifier for the order item"
+        data_type: integer
+      - name: product_id
+        description: "Foreign key referencing the product in the order"
+        data_type: integer
+      - name: item_quantity
+        description: "The quantity of the item ordered"
+        data_type: integer
+      - name: unit_price
+        description: "Price per unit of the item"
+        data_type: decimal
+      - name: discount
+        description: "The discount applied to the item"
+        data_type: decimal
+      - name: sold_amount
+        description: "Total sold amount for the order item, calculated as item_quantity * (unit_price * (1 - discount))"
+        data_type: decimal
+
+  - name: int_00_local_bike__order_store_custo2
+    description: "This model combines order, staff, store, and customer data, providing a comprehensive view of each order along with the staff who processed it, the store from which it was fulfilled, and customer details"
+    columns:
+      - name: order_id
+        description: "Unique identifier for the order"
+        data_type: integer
+      - name: order_date
+        description: "The date when the order was placed"
+        data_type: date
+      - name: shipped_date
+        description: "The date when the order was shipped"
+        data_type: date
+      - name: staff_id
+        description: "Unique identifier for the staff member who processed the order"
+        data_type: integer
+      - name: staff_full_name
+        description: "Full name of the staff member who processed the order, concatenation of first and last name"
+        data_type: string
+      - name: store_id
+        description: "Unique identifier for the store where the order was done"
+        data_type: integer
+      - name: store_name
+        description: "Name of the store where the order was done"
+        data_type: string
+      - name: customer_id
+        description: "Unique identifier for the customer who placed the order"
+        data_type: integer
+      - name: customer_full_name
+        description: "Full name of the customer concatenation of first and last name"
+        data_type: string
+      - name: customer_email
+        description: "Email address of the customer"
+        data_type: string
+      - name: customer_phone
+        description: "Phone number of the customer"
+        data_type: string
+      - name: order_date
+        description: "The date when the order"
+        data_type: date
+      - name: shipped_date
+        description: "The date when the order was shipped"
+        data_type: date
+
